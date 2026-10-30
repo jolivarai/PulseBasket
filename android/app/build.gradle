@@ -1,0 +1,50 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.pulso.basket"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    defaultConfig {
+        applicationId = "com.pulso.basket"
+        // 23 = Android 6. Los permisos en runtime y el GPS de alta precisión
+        // funcionan desde aquí; el 95 % de dispositivos actuales lo cumplen.
+        minSdk = 23
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    buildTypes {
+        release {
+            // Firma de depuración para que `flutter build apk --release`
+            // funcione sin configurar keystore. Para Play Store, ver docs/GITHUB.md.
+            signingConfig = signingConfigs.debug
+            minifyEnabled = false
+            shrinkResources = false
+        }
+    }
+}
+
+dependencies {
+    // ServiceCompat.startForeground(...) con foregroundServiceType y
+    // ContextCompat.registerReceiver(...) con flag de exportación.
+    implementation "androidx.core:core-ktx:1.13.1"
+}
+
+flutter {
+    source = "../.."
+}

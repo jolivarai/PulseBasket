@@ -1,0 +1,36 @@
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.buildDir = "../build"
+
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+    project.evaluationDependsOn(":app")
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
+
+// ── Compatibilidad con plugins que leen `flutter.*` al evaluarse ──────────
+// geolocator_android (y otros) usan `compileSdk flutter.compileSdkVersion`
+// dentro de su bloque android{}. En Gradle 8 + AGP 8 la extensión `flutter`
+// solo vive en :app, así que se publican los mismos valores como propiedades
+// extra en el resto de subproyectos. Si tu toolchain ya los expone, estos
+// valores coinciden y no cambian nada.
+subprojects { p ->
+    if (p.name != "app") {
+        p.ext.flutter = [
+            compileSdkVersion: 34,
+            minSdkVersion    : 23,
+            targetSdkVersion : 34,
+            versionCode      : 1,
+            versionName      : "1.0.0",
+            ndkVersion       : "26.1.10909125",
+        ]
+    }
+}

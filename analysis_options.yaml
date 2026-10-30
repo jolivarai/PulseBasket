@@ -1,0 +1,9 @@
+include: package:flutter_lints/flutter.yaml
+
+# Se mantienen solo reglas que no generan ruido en un proyecto real:
+# los literales con apóstrofos (d'..., 5'32") son intencionales.
+linter:
+  rules:
+    avoid_empty_else: true
+    avoid_relative_lib_imports: true
+    unnecessary_const: false
