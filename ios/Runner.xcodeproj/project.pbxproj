@@ -137,6 +137,7 @@
 				331C8082294A63A400263BE5 /* RunnerTests */,
 				31024CC08EB7828A05E161DB /* LiveActivityBridge.swift */,
 				5C594BDEA527E5C8A1D21E38 /* PulsoActivityAttributes.swift */,
+				4A9F1C0000000000000000B1 /* PulsoWidget */,
 			);
 			sourceTree = "<group>";
 		};
